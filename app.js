@@ -7,52 +7,43 @@ let stocks = {
 
 let is_shop_open = true;
 
-let order = (time, work) => {
+let time =(ms)=>{
   return new Promise((resolve, reject) => {
-    if (is_shop_open) {
-      setTimeout(() => {
-        resolve(work());
-      }, time);
-    } else {
-      reject(
-        ("Sorry for the inconvenience, our shop is not open right now")
-      );
+    if(is_shop_open){
+      setTimeout(resolve,ms);
     }
-  });
-};
-order(2000,()=>(console.log(`${stocks.fruits[0]}`)))
+    else{
+      reject(console.log('Sorry For Inconvience Our Shop is not open now'))
+    }
+  })
+}
 
-.then(()=>{
-  return order(0,()=>(console.log('The Production has Started')))
-})
-
-.then(()=>{
-  return order(2000,()=>(console.log('The Friut Has been Chopped')))
-})
-
-.then(()=>{
-  return order(1000,()=>(console.log(`Added ${stocks.liquid[0]} and ${stocks.liquid[1]}`)))
-})
-
-.then(()=>{
-  return order(1000,()=>(console.log('The machine has started')))
-})
-
-.then(()=>{
-  return order(2000,()=>(console.log(`The Ice cream is on the ${stocks.holder[0]}`)))
-})
-
-.then(()=>{
-  return order(3000,()=>(console.log(`the toping is ${stocks.toppings[0]}`)))
-})
-
-.then(()=>{
-  return order(2000,()=>(console.log('The Ice Cream Has BEen Served')))
-
-})
-
-
-
+async function kitchen(){
+  try{
+    await time(2000);
+    console.log(`The friut  is ${stocks.fruits[1]}`)
+    console.log('The production has Started')
+    await time(2000);
+    console.log('The friuts are chopped')
+    await time(1000);
+    console.log(`The Liquids are added ${stocks.liquid[0] }and ${stocks.liquid[1]}`)
+    await time(1000);
+    console.log('The Machine Has Started')
+    await time(2000);
+    console.log(`The Icecream is put on ${stocks.holder[0]}`)
+    await time(3000);
+    console.log(`The topping is ${stocks.toppings[0]}`)
+    await time(2000);
+    console.log('The Iccecream has been served')
+  }
+  catch(error){
+    console.log('The Customer Has Left')
+  }
+  finally{
+    console.log('Thank You')
+  }
+}
+kitchen();
 
 
 
